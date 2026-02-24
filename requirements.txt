@@ -1,0 +1,7 @@
+python-okx
+pandas>=2.0.0
+numpy>=1.24.0
+python-dotenv>=1.0.0
+loguru>=0.7.0
+matplotlib>=3.7.0
+tabulate>=0.9.0
