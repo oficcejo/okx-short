@@ -128,24 +128,32 @@ class OKXClient:
     # 交易操作
     # ═══════════════════════════════════════════
 
-    def place_market_short(self, inst_id: str = None, sz: str = "1") -> dict | None:
+    def place_market_short(self, inst_id: str = None, sz: str = "1", td_mode: str = None) -> dict | None:
         """
         市价做空开仓
         sz: 合约张数
+        td_mode: 保证金模式 (cross/isolated)
         """
         inst_id = inst_id or config.INST_ID
+        td_mode = td_mode or config.MGN_MODE
 
-        result = self.trade.place_order(
-            instId=inst_id,
-            tdMode=config.MGN_MODE,
-            side="sell",
-            posSide="short",
-            ordType="market",
-            sz=sz,
-            tag=config.BROKER_TAG,
-        )
+        # 构建下单参数
+        # 注意：OKX账户可能设置为单向持仓模式，此时不应传posSide
+        params = {
+            "instId": inst_id,
+            "tdMode": td_mode,
+            "side": "sell",
+            "ordType": "market",
+            "sz": sz,
+            "tag": config.BROKER_TAG,
+        }
+        logger.debug(f"下单参数: {params}")
+
+        result = self.trade.place_order(**params)
         if result["code"] != "0":
             logger.error(f"做空开仓失败: {result['msg']}")
+            logger.error(f"错误码: {result.get('code', 'unknown')}")
+            logger.error(f"完整响应: {result}")
             return None
 
         order_id = result["data"][0]["ordId"]
@@ -153,19 +161,19 @@ class OKXClient:
         return result["data"][0]
 
     def place_tp_sl(
-        self, inst_id: str = None, tp_price: float = 0, sl_price: float = 0, sz: str = "1"
+        self, inst_id: str = None, tp_price: float = 0, sl_price: float = 0, sz: str = "1", td_mode: str = None
     ) -> dict | None:
         """
         设置止盈止损 (TP/SL)
         做空情况下：tp_price < 当前价, sl_price > 当前价
         """
         inst_id = inst_id or config.INST_ID
+        td_mode = td_mode or config.MGN_MODE
 
         result = self.trade.place_algo_order(
             instId=inst_id,
-            tdMode=config.MGN_MODE,
+            tdMode=td_mode,
             side="buy",         # 做空的平仓方向是 buy
-            posSide="short",
             ordType="oco",      # OCO = One-Cancels-the-Other (止盈止损)
             sz=sz,
             tpTriggerPx=str(round(tp_price, 2)),
@@ -193,13 +201,13 @@ class OKXClient:
         positions = [p for p in result["data"] if float(p.get("pos", "0")) != 0]
         return positions
 
-    def close_position(self, inst_id: str = None) -> bool:
+    def close_position(self, inst_id: str = None, td_mode: str = None) -> bool:
         """市价平仓"""
         inst_id = inst_id or config.INST_ID
+        td_mode = td_mode or config.MGN_MODE
         result = self.trade.close_positions(
             instId=inst_id,
-            mgnMode=config.MGN_MODE,
-            posSide="short",
+            mgnMode=td_mode,
             tag=config.BROKER_TAG,
         )
         if result["code"] != "0":

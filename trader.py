@@ -101,6 +101,10 @@ class Trader:
         # 执行交易
         self._execute_trade(signal)
 
+    def _get_td_mode(self) -> str:
+        """获取交易模式 (cross/isolated)"""
+        return getattr(config, 'MGN_MODE', 'cross')
+
     def _execute_trade(self, signal: dict):
         """执行做空交易"""
         price = signal["price"]
