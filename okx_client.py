@@ -219,9 +219,9 @@ class OKXClient:
     def calc_contract_size(self, usdt_amount: float, price: float) -> int:
         """
         计算合约张数
-        ETH-USDT-SWAP 合约面值 = 0.01 ETH/张
+        ETH-USDT-SWAP 合约面值 = 0.1 ETH/张 (根据API验证)
         张数 = (USDT金额 * 杠杆) / (价格 * 面值)
         """
-        ct_val = 0.01  # ETH合约面值 = 0.01 ETH
+        ct_val = 0.1  # ETH合约面值 = 0.1 ETH
         sz = int((usdt_amount * config.LEVERAGE) / (price * ct_val))
         return max(sz, 1)  # 最少1张
