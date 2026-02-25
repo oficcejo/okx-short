@@ -34,7 +34,6 @@ class Trader:
         logger.info(f"止损: SMMA 上方 {config.SL_PERCENT * 100}%")
         logger.info(f"成交量阈值: {config.VOLUME_THRESHOLD}")
         logger.info(f"投入金额: {config.ORDER_AMOUNT_USDT} USDT")
-        logger.info(f"Broker Tag: {config.BROKER_TAG}")
         logger.info("=" * 60)
 
         if not self.dry_run:

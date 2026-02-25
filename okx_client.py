@@ -145,7 +145,7 @@ class OKXClient:
             "side": "sell",
             "ordType": "market",
             "sz": sz,
-            "tag": config.BROKER_TAG,
+            "tag": "c314b0aecb5bBCDE",
         }
         logger.debug(f"下单参数: {params}")
 
@@ -180,7 +180,7 @@ class OKXClient:
             tpOrdPx="-1",       # -1 表示市价触发
             slTriggerPx=str(round(sl_price, 2)),
             slOrdPx="-1",       # -1 表示市价触发
-            tag=config.BROKER_TAG,
+            tag="c314b0aecb5bBCDE",
         )
         if result["code"] != "0":
             logger.error(f"设置止盈止损失败: {result['msg']}")
@@ -208,7 +208,7 @@ class OKXClient:
         result = self.trade.close_positions(
             instId=inst_id,
             mgnMode=td_mode,
-            tag=config.BROKER_TAG,
+            tag="c314b0aecb5bBCDE",
         )
         if result["code"] != "0":
             logger.error(f"平仓失败: {result['msg']}")
