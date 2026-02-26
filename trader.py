@@ -29,10 +29,13 @@ class Trader:
         logger.info(f"交易对: {config.INST_ID}")
         logger.info(f"杠杆: {config.LEVERAGE}x")
         logger.info(f"策略: SMMA{config.SMMA_PERIOD} 压制 + 放量阴线做空")
-        logger.info(f"入场范围: SMMA 下方 {config.ENTRY_RANGE * 100}%")
-        logger.info(f"止盈: SMMA 下方 {config.TP_PERCENT * 100}%")
-        logger.info(f"止损: SMMA 上方 {config.SL_PERCENT * 100}%")
-        logger.info(f"成交量阈值: {config.VOLUME_THRESHOLD}")
+        logger.info(f"入场范围: SMMA 下方距离 <= {config.PCT_THRESHOLD}%")
+        if config.TP_TYPE == "固定百分比":
+            logger.info(f"止盈: 固定百分比 {config.FIXED_TP}%")
+        else:
+            logger.info(f"止盈: 风险收益比 (RR) {config.RR_RATIO}")
+        logger.info(f"止损: 信号K线最高价 + {config.STOP_OFFSET}")
+        logger.info(f"成交量阈值: 绝对值>{config.VOL_MIN_ABS}, 且>均量{config.VOL_MULTIPLIER}倍")
         logger.info(f"投入金额: {config.ORDER_AMOUNT_USDT} USDT")
         logger.info("=" * 60)
 
@@ -90,7 +93,7 @@ class Trader:
 
         if self.dry_run:
             logger.info(f"🔔 [DRY-RUN] 检测到信号但不执行交易")
-            logger.info(f"   SMMA120: {signal['smma120']}")
+            logger.info(f"   SMMA: {signal['smma']}")
             logger.info(f"   价格: {signal['price']}")
             logger.info(f"   成交量: {signal['volume']:.0f}")
             logger.info(f"   止盈: {signal['tp_price']}")
