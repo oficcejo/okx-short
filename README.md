@@ -60,7 +60,7 @@ pip install -r requirements.txt
 cp .env.example .env
 ```
 
-3. **注册获取OKX API**:跳转okx官网注册 https://www.gtohfmmy.com/join/6746503
+2. **注册获取OKX API**:跳转okx官网注册 https://www.gtohfmmy.com/join/6746503
    - 使用上面邀请码注册并完成任务，最高获100usdt奖励
    - 登录OKX → 点击右上角个人中心 → API管理 → 创建API
    - 权限：需要"交易"权限
@@ -77,7 +77,7 @@ OKX_PASSPHRASE=your_passphrase
 OKX_DEMO=true  # true 为模拟盘，false 为实盘
 ```
 
-3. (可选) 修改 `config.py` 中的策略参数（如杠杆倍数、成交量阈值等）新手建议使用10x-20x杠杆，投入保证金不超过100usdt，后期盈利后可逐步加大投入力度。如交易账户有100usdt，可投入20u+20倍杠杆，每次最高损失几U,不会爆仓，等账户到200U，可投入40或50U，以此类推吧，总之不要满仓干。
+3. (可选) 修改 `config.py` 中的策略参数（如杠杆倍数、成交量阈值等，默认已是回测最优配置 **新手无需改动 或只改动投入资金 默认50usdt20倍杠杆**）新手建议使用10x-20x杠杆，投入保证金不超过100usdt，后期盈利后可逐步加大投入力度。如交易账户有100usdt，可投入20u+20倍杠杆，每次最高损失几U,不会爆仓，等账户到200U，可投入40或50U，以此类推吧，总之不要满仓干。
    <img width="1083" height="736" alt="image" src="https://github.com/user-attachments/assets/14fbb167-88ac-4b01-8aad-bc045673c012" />
 
 
