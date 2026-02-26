@@ -1,5 +1,5 @@
 """
-配置管理模块
+配置管理模块 默认已是回测最优配置 新手无需改动 或只改动投入资金 默认50usdt20倍杠杆
 从 .env 文件和环境变量中加载所有配置参数
 """
 import os
@@ -25,14 +25,14 @@ HTTPS_PROXY = os.getenv("HTTPS_PROXY", "")
 # 交易参数
 # ═══════════════════════════════════════════
 INST_ID = "ETH-USDT-SWAP"          # 交易对：ETH永续合约
-LEVERAGE = 10                       # 杠杆倍数 (已根据 160 USDT 资金优化)
+LEVERAGE = 20                       # 杠杆倍数 
 BAR = "1m"                          # K线周期
 MGN_MODE = "cross"                  # 保证金模式：全仓
 
 # ═══════════════════════════════════════════
 # 策略参数
 # ═══════════════════════════════════════════
-SMMA_PERIOD = 170                   # SMMA 周期
+SMMA_PERIOD = 170                   # SMMA 周期 
 VOL_MIN_ABS = 1000                  # 最小绝对量能
 VOL_MULTIPLIER = 9                  # 均量倍数 (RV)
 BODY_PERCENT = 60.0                 # 阴线实体占比 (%)
@@ -43,7 +43,7 @@ TP_TYPE = "固定百分比"                # 止盈模式 ("固定百分比" 或
 STOP_OFFSET = 0.5                   # 止损离最高价偏移 (USDT)
 FIXED_TP = 1.2                      # 固定止盈百分比 (%)
 RR_RATIO = 2.0                      # 风险收益比 (1:N)
-ORDER_AMOUNT_USDT = 20              # 每次开仓投入 USDT
+ORDER_AMOUNT_USDT = 50              # 每次开仓投入 USDT
 
 # ═══════════════════════════════════════════
 # 运行参数
