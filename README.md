@@ -5,6 +5,9 @@
 
 **youtube本地部署视频教程** https://youtu.be/TRx50NyeEV4
 **有任何问题，可在视频评论区交流**
+2026.2.20-26
+<img width="1048" height="656" alt="image" src="https://github.com/user-attachments/assets/af1dd0a3-8f85-4ef8-b393-f22bba79dfd8" />
+
 
 ## 🌟 核心特性
 
