@@ -35,15 +35,11 @@ d:\www\okx\okx-short\
 
 建议使用 Python 3.12.12 环境。
 中国大陆地区需要使用代理才能访问okx官网，请自行解决。
-推荐使用下方美国服务器+宝塔面板部署，稳定，速度快，价格便宜，支持支付宝付款，最低10美元/年，免代理，稳定，推荐racknerd，适合新手。
+推荐使用方式二部署：美国服务器+宝塔面板部署，稳定，速度快，价格便宜，支持支付宝付款，最低10美元/年，免代理，稳定，推荐racknerd，适合新手。
 
 ```bash
 # 下载解压后进入项目目录，右键点击
-<img width="1308" height="719" alt="image" src="https://github.com/user-attachments/assets/db7b441c-88df-46f7-96b1-734f5e02e5d1" />
-
 cd d:\www\okx\okx-short
-或者目录中windows右键在终端中打开
-<img width="1020" height="669" alt="image" src="https://github.com/user-attachments/assets/3bbb06f5-e6eb-4795-8a45-e6196020b8d4" />
 
 # 依次输入以下命令创建并激活虚拟环境
 python -m venv venv
@@ -52,6 +48,9 @@ python -m venv venv
 # 安装依赖
 pip install -r requirements.txt
 ```
+<img width="1308" height="719" alt="image" src="https://github.com/user-attachments/assets/db7b441c-88df-46f7-96b1-734f5e02e5d1" />
+或者目录中windows右键在终端中打开
+<img width="1020" height="669" alt="image" src="https://github.com/user-attachments/assets/3bbb06f5-e6eb-4795-8a45-e6196020b8d4" />
 
 ### 2. 配置说明
 
@@ -65,7 +64,11 @@ cp .env.example .env
    - 使用上面邀请码注册并完成任务，最高获100usdt奖励
    - 登录OKX → 点击右上角个人中心 → API管理 → 创建API
    - 权限：需要"交易"权限
-   - **重要**：妥善保管密钥，不要泄露
+   - **重要**：妥善保管密钥，不要泄露，资金需要划转到交易账户才能使用
+   - <img width="1635" height="795" alt="image" src="https://github.com/user-attachments/assets/66a8685f-e428-4fb8-afc9-efde9053a223" />
+
+将.env文件使用记事本打开，把apikey等复制到=号后面
+<img width="1145" height="505" alt="image" src="https://github.com/user-attachments/assets/952475dc-f2c2-4410-a072-8550dafa253b" />
 
 ```ini
 OKX_API_KEY=your_key
@@ -74,7 +77,9 @@ OKX_PASSPHRASE=your_passphrase
 OKX_DEMO=true  # true 为模拟盘，false 为实盘
 ```
 
-3. (可选) 修改 `config.py` 中的策略参数（如杠杆倍数、成交量阈值等）。
+3. (可选) 修改 `config.py` 中的策略参数（如杠杆倍数、成交量阈值等）新手建议使用10x-20x杠杆，投入保证金不超过100usdt，后期盈利后可逐步加大投入力度。如交易账户有100usdt，可投入20u+20倍杠杆，每次最高损失几U,不会爆仓，等账户到200U，可投入40或50U，以此类推吧，总之不要满仓干。
+   <img width="1083" height="736" alt="image" src="https://github.com/user-attachments/assets/14fbb167-88ac-4b01-8aad-bc045673c012" />
+
 
 ### 3. 下载数据与回测
 
@@ -99,7 +104,7 @@ python trader.py --dry-run
 # 开始自动交易
 python trader.py
 ```
-
+注意，本地运行每次都要激活虚拟环境
 ### 🎯 方式二：美国服务器+宝塔面板快速部署
 
 ### 服务器部署，推荐美国vps服务器部署，价格便宜，访问速度。
@@ -121,12 +126,18 @@ python trader.py
 wget -O install.sh http://download.bt.cn/install/install_6.0.sh && sh install.sh
 
 # 2. 安装Python项目管理器
-# 在宝塔面板 -> 软件商店 -> 搜索"Python项目管理器" -> 安装
+# 在宝塔面板 -> 软件商店 -> 搜索"Python项目管理器" -> 安装python3.12.12
 
-# 3. 网站->添加python项目，启动文件选择: trader.py
+# 3. 上传源码
+# 在宝塔面板 -> 文件 -> 新建文件夹"okx-short" -> 将下载好的文件拖入上传
+
+# 3. 网站->添加python项目，启动命令:python trader.py
 ```
+<img width="1910" height="915" alt="image" src="https://github.com/user-attachments/assets/6507a1e9-752e-4da5-a9ac-06963b265e97" />
 
-然后通过域名或IP访问Web界面
+等待自动安装依赖，程序为绿色三角即是正常运行了
+<img width="1261" height="481" alt="image" src="https://github.com/user-attachments/assets/76ad0b0f-f86b-4678-b9fb-d957946f4144" />
+
 
 ## 📈 策略逻辑详解
 
@@ -139,7 +150,7 @@ wget -O install.sh http://download.bt.cn/install/install_6.0.sh && sh install.sh
 本程序提供的所有策略和代码仅供学习和研究使用。由于数字货币交易具有极高风险（尤其是 50 倍高杠杆），使用本程序产生的任何盈亏由使用者自行承担，开发者不承担任何法律责任。
 
 **风险提示**：50倍杠杆下，2% 的反向波动即可导致爆仓，请务必在模拟盘充分测试。
-
+回测1：
 参数设置示例：
 SMMA_PERIOD = 120                   # SMMA 均线周期
 ENTRY_RANGE = 0.005                 # 入场范围：SMMA 下方 0.2%
