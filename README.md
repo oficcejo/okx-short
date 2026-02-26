@@ -31,15 +31,21 @@ d:\www\okx\okx-short\
 
 ## 🚀 快速开始
 
-### 1. 环境准备
+### 1. 环境准备（本地部署）
 
-建议使用 Python 3.10+ 环境。
+建议使用 Python 3.12.12 环境。
+中国大陆地区需要使用代理才能访问okx官网，请自行解决。
+推荐使用下方美国服务器+宝塔面板部署，稳定，速度快，价格便宜，支持支付宝付款，最低10美元/年，免代理，稳定，推荐racknerd，适合新手。
 
 ```bash
-# 进入项目目录
-cd d:\www\okx\okx-short
+# 下载解压后进入项目目录，右键点击
+<img width="1308" height="719" alt="image" src="https://github.com/user-attachments/assets/db7b441c-88df-46f7-96b1-734f5e02e5d1" />
 
-# 创建并激活虚拟环境
+cd d:\www\okx\okx-short
+或者目录中windows右键在终端中打开
+<img width="1020" height="669" alt="image" src="https://github.com/user-attachments/assets/3bbb06f5-e6eb-4795-8a45-e6196020b8d4" />
+
+# 依次输入以下命令创建并激活虚拟环境
 python -m venv venv
 .\venv\Scripts\activate
 
@@ -50,7 +56,16 @@ pip install -r requirements.txt
 ### 2. 配置说明
 
 1. 复制 `.env.example` 为 `.env`。
-2. 配置您的 OKX API 信息：
+   
+```bash
+cp .env.example .env
+```
+
+3. **注册获取OKX API**:跳转okx官网注册 https://www.gtohfmmy.com/join/6746503
+   - 使用上面邀请码注册并完成任务，最高获100usdt奖励
+   - 登录OKX → 点击右上角个人中心 → API管理 → 创建API
+   - 权限：需要"交易"权限
+   - **重要**：妥善保管密钥，不要泄露
 
 ```ini
 OKX_API_KEY=your_key
@@ -84,6 +99,34 @@ python trader.py --dry-run
 # 开始自动交易
 python trader.py
 ```
+
+### 🎯 方式二：美国服务器+宝塔面板快速部署
+
+### 服务器部署，推荐美国vps服务器部署，价格便宜，访问速度。
+推荐美国老牌服务器厂商RackNerd稳定服务器**支持支付宝付款**
+- [推荐：满足要求型：1核心1G内存25GSSD2T带宽10.60美元/年](https://my.racknerd.com/aff.php?aff=13902&pid=923)
+- [进阶型：2核心2.5G内存45GSSD3.5T带宽18.29美元/年](https://my.racknerd.com/aff.php?aff=13902&pid=924)
+- [推荐型：3核心4G内存65GSSD6T带宽29.98美元/年，强烈推荐，可部署openclaw等多个机器人](https://my.racknerd.com/aff.php?aff=13902&pid=925)
+- [高端型：5核心6G内存100GSSD12T带宽44.98美元/年](https://my.racknerd.com/aff.php?aff=13902&pid=926)
+
+### 如活动失效或显示库存不足，推荐购买七牛云新加坡服务器
+
+- [进阶型：1核心2G内存20GSSD3.5T带宽50M138元人民币/年](https://s.qiniu.com/bAn6N3)
+- [推荐型：2核心4G内存40GSSD7T带宽100M250元人民币/年](https://s.qiniu.com/Abu6Jb)
+- 
+**适合VPS/云服务器，图形化管理，自动重启保障！**
+
+```bash
+# 1. 安装宝塔面板（请去官方获取最新安装命令）
+wget -O install.sh http://download.bt.cn/install/install_6.0.sh && sh install.sh
+
+# 2. 安装Python项目管理器
+# 在宝塔面板 -> 软件商店 -> 搜索"Python项目管理器" -> 安装
+
+# 3. 网站->添加python项目，启动文件选择: trader.py
+```
+
+然后通过域名或IP访问Web界面
 
 ## 📈 策略逻辑详解
 
